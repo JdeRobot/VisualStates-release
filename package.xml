@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <package>
   <name>visualstates</name>
-  <version>0.1.1</version>
+  <version>0.2.1</version>
   <description>The VisualStates is reactive hierarchical visual robot planning tool.</description>
   <maintainer email="asik.okan@gmail.com">Okan Aşık</maintainer>
   <license>GPLv3</license>
@@ -9,7 +9,5 @@
   <run_depend>python-rospkg</run_depend>
   <run_depend>python-qt5-bindings</run_depend>
   <run_depend>python-qt5-bindings-qsci</run_depend>
-  <run_depend>python-sysv-ipc</run_depend>
-  <run_depend>python-yaml</run_depend>
   <export/>
 </package>
