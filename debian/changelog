@@ -1,0 +1,12 @@
+ros-melodic-visualstates (0.2.3-1bionic) bionic; urgency=high
+
+  * 0.2.2
+  * have a new informative about dialog
+  * fixes an import bug
+  * fixes state initialization bug.
+  * fixes state and transition name editing in runtime gui bug.
+  * fixes runtime gui hierarhical view bug.
+
+ -- Okan Aşık <asik.okan@gmail.com>  Sun, 26 Jan 2020 18:30:00 -0000
+
+
