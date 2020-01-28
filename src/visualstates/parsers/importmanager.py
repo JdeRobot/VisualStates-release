@@ -18,7 +18,7 @@
 
   '''
 
-from visualstates.configs.config import RosConfig
+from visualstates.configs.rosconfig import RosConfig
 
 class ImportManager():
     """
@@ -37,13 +37,10 @@ class ImportManager():
 
     Returns list of States which needs to be Imported
     """
-    def __init__(self):
-        self.JDEROBOTCOMM = 0
-        self.ROS = 1
 
     def updateAuxiliaryData(self, file, klass):
         """Wrapper upon all update functions"""
-        importedState = self.updateActiveState(file[0], klass.automataScene.getStateIndex(), klass.activeState)
+        importedState = self.updateActiveState(file[0], klass.automataScene.stateIndex, klass.automataScene.transitionIndex, klass.activeState)
         config = self.updateConfigs(file[1], klass.config)
         libraries = self.updateLibraries(file[2], klass.libraries)
         globalNamespace = self.updateNamespace(file[3], klass.globalNamespace)
@@ -67,23 +64,14 @@ class ImportManager():
     def updateConfigs(self, newConfig, config):
         """Updates Existing Configurations with imported Configurations"""
         if newConfig:
-            if config and newConfig.type == config.type:
-                if newConfig.type == self.ROS:
-                    config.updateROSConfig(newConfig)
-                elif newConfig.type == self.JDEROBOTCOMM:
-                    config.updateJDERobotCommConfig(newConfig)
-            else:
-                if newConfig.type == self.ROS:
-                    config = RosConfig()
-                    config.updateROSConfig(newConfig)
-                elif newConfig.type == self.JDEROBOTCOMM:
-                    config = JdeRobotConfig()
-                    config.updateJDERobotCommConfig(newConfig)
+            if config is None:
+                config = RosConfig()
+            config.updateROSConfig(newConfig)
         return config
 
-    def updateActiveState(self, importState, stateID, activeState):
+    def updateActiveState(self, importState, stateID, transitionID, activeState):
         """Updates Parent State with States to be imported"""
-        importState = self.updateIDs(importState, stateID)
+        importState = self.updateIDs(importState, stateID, transitionID)
         for state in importState.getChildren():
             activeState.addChild(state)
             state.setParent(activeState)
@@ -91,14 +79,19 @@ class ImportManager():
         activeState.setNamespace(updatedParentNamespace)
         return importState
 
-    def updateIDs(self, importState, stateID):
+    def updateIDs(self, importState, stateID, transitionID):
         """ Wrapper upon UpdateStateIDs """
         self.updateStateIDs(importState, stateID)
+        self.updateTranIDs(importState, transitionID)
         return importState
 
     def updateStateIDs(self, importState, stateID):
         """ Assign New IDs to Imported State Data Recursively """
         for child in importState.getChildren():
-            child.setID(stateID)
-            stateID += 1
+            child.setID(stateID + child.getID())
             self.updateStateIDs(child, stateID)
+
+    def updateTranIDs(self, importState, transitionID):
+        for child in importState.getChildrenTransitions():
+            child.setID(transitionID + child.getID())
+
