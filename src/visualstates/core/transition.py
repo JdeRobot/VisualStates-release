@@ -160,7 +160,10 @@ class Transition:
             self.setTemporalTime(int(transitionElement.getElementsByTagName('time')[0].childNodes[0].nodeValue))
         elif self.transitionType == TransitionType.CONDITIONAL:
             self.setCondition(transitionElement.getElementsByTagName('condition')[0].childNodes[0].nodeValue)
-        self.name = transitionElement.getElementsByTagName('name')[0].childNodes[0].nodeValue
+        if len(transitionElement.getElementsByTagName('name')[0].childNodes) > 0:
+            self.name = transitionElement.getElementsByTagName('name')[0].childNodes[0].nodeValue
+        else:
+            self.name = ""
         self.x = float(transitionElement.getElementsByTagName('posx')[0].childNodes[0].nodeValue)
         self.y = float(transitionElement.getElementsByTagName('posy')[0].childNodes[0].nodeValue)
         # parse optinal code tag
@@ -171,3 +174,9 @@ class Transition:
         destinationId = int(transitionElement.getElementsByTagName('destinationid')[0].childNodes[0].nodeValue)
         self.addDestinationState(statesById[destinationId])
         self.isPosChanged = True
+
+    def setID(self, id):
+        self.id = id
+
+    def getID(self):
+        return self.id
