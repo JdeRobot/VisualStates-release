@@ -1,3 +1,26 @@
+## visualstates (kinetic) - 0.2.3-3
+
+The packages in the `visualstates` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release --rosdistro kinetic --track kinetic visualstates` on `Thu, 27 Feb 2020 12:12:05 -0000`
+
+The `visualstates` package was released.
+
+Version of package(s) in repository `visualstates`:
+
+- upstream repository: https://github.com/JdeRobot/VisualStates.git
+- release repository: https://github.com/JdeRobot/VisualStates-release.git
+- rosdistro version: `0.2.3-2`
+- old version: `0.2.3-2`
+- new version: `0.2.3-3`
+
+Versions of tools used:
+
+- bloom version: `0.9.0`
+- catkin_pkg version: `0.4.15`
+- rosdep version: `0.18.0`
+- rosdistro version: `0.8.0`
+- vcstools version: `0.1.42`
+
+
 ## visualstates (melodic) - 0.2.3-3
 
 The packages in the `visualstates` repository were released into the `melodic` distro by running `/usr/bin/bloom-release --rosdistro melodic --track melodic visualstates` on `Thu, 27 Feb 2020 11:45:41 -0000`
